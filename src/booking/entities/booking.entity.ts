@@ -1,12 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
-export class campsite {
+export class Campsite {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
+  bookingtype: string;
+  
+  @Column()
+  roomnumber: number;
 
   @Column()
   email: string;
@@ -16,7 +19,8 @@ export class campsite {
 
   @Column()
   guests: string;
-
+  
   @Column()
   location: string;
+
 }

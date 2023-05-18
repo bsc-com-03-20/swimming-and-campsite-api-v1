@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
  import { User } from './entities/user.entity';
 //import { Bcrypt } from './bcrypt';
@@ -14,32 +14,26 @@ export class UsersController {
     return this.usersService.createUser(userInfo);
   }
 
+  @Get(':id')
+  async getUserById(@Param('id') id: number): Promise<any> {
+    const user = await this.usersService.getUserById(id);
+    return { user };
+    // return this.userService.getUserById(id);
+  }
+ 
+  @Put(':id')
+  async updateUser(
+    @Param('id') id: number, @Body() userData: User,
+  ): Promise<User> {
+    return this.usersService.updateUser(id, userData);
+  }
 
-  
-  
+
+  @Delete(':id')
+  async deleteUser(@Param('id') id: number): Promise<{ message: string }> {
+    await this.usersService.delete(id);
+    return { message: 'User with id ${id} has been deleted successfully' };
+    // return this.userService.deleteUser(id);
+   } 
 }
-
-
-
-function setpassword(password: any, string: any) {
-  throw new Error('Function not implemented.');
-}
-//   findAll() {
-//     return this.usersService.findAll();
-//   }
-
-//   @Get(':id')
-//   findOne(@Param('id') id: string) {
-//     return this.usersService.findOne(+id);
-//   }
-
-//   @Patch(':id')
-//   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-//     return this.usersService.update(+id, updateUserDto);
-//   }
-
-//   @Delete(':id')
-//   remove(@Param('id') id: string) {
-//     return this.usersService.remove(+id);
-//   }
-
+ 

@@ -1,10 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
- import { User } from './users/entities/user.entity';
-import { AuthModule } from './auth/auth.module';
 import { BookingModule } from './booking/booking.module';
-import 'reflect-metadata'
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -13,10 +11,10 @@ import 'reflect-metadata'
     port: 3306,
     password: '',
     username: 'root',
-    database: 'swim_db', 
-    entities: [User],
+    database: 'malawiCamps',
+    autoLoadEntities: true,
     synchronize: true, 
-    autoLoadEntities: true
+   
 }),
 UsersModule,
 AuthModule,

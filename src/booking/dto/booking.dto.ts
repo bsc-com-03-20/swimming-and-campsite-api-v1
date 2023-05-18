@@ -1,13 +1,13 @@
 
 export class BookingDto {
     id: number;
-    name: string;
-    location: string;
-    date: Date;
-    guests: string;
+    bookingtype: string;
     email:string;
-    [x: string]: any;
-  }
+    date: Date;
+    guest: string;
+    location: string;
+    roomnumber: number;
+      }
   
      
   

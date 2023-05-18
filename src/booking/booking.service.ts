@@ -1,21 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-//import { Booking } from './booking.entity';
-import { BookingDto } from './dto/booking.dto';
-import { campsite } from './entities/booking.entity';
-
+import { Campsite} from './entities/booking.entity';
+  
 @Injectable()
 export class BookingService {
+ 
   constructor(
-    @InjectRepository(campsite)
-    private readonly bookingRepository: Repository<campsite>,
+    @InjectRepository(Campsite)
+    private readonly bookingRepository: Repository<Campsite>,
   ) {}
-
-  async createBooking(createBookingDto: BookingDto): Promise<any> {
-    const {name, email, date, guests, location} = createBookingDto
-    const bookingDetails = this.bookingRepository.create({name, location,email, date, guests})
-
-   return await this.bookingRepository.save(bookingDetails);
+  async createBooking(book: Campsite): Promise<Campsite> {
+     return this.bookingRepository.save(book)
   }
+
+  async getBookingById(id: number): Promise<Campsite> {
+    return this.bookingRepository.findOne({ where: { id } });
+  }
+
+  async updateBooking(id: number, bookingDtos: Campsite,): Promise<Campsite> {
+    const booking = await this.getBookingById(id);
+    this.bookingRepository.merge(booking, bookingDtos);
+    return this.bookingRepository.save(booking);
+  }
+
+ 
+    async delete(id: number): Promise<void> {
+    const existingBooking = await this.bookingRepository.delete(id);
+       if (!existingBooking) {
+      throw new Error(`A guest with id ${id} not found`);  
+      }
+      await this.bookingRepository.delete(id);
 }
+  } 
