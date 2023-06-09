@@ -1,14 +1,13 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
  import { User } from './entities/user.entity';
+import { ApiProperty, ApiTags } from '@nestjs/swagger';
 //import { Bcrypt } from './bcrypt';
  
-
-@Controller('Users')
-
+@ApiTags('Users Section')
+@Controller('User')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-
   @Post()
   async createUser(@Body() userInfo: User): Promise<User> {
     return this.usersService.createUser(userInfo);

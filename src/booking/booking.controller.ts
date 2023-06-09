@@ -3,7 +3,9 @@ import { userInfo } from 'os';
  import { BookingService } from './booking.service';
 import { BookingDto } from './dto/booking.dto';
 import { Campsite } from './entities/booking.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Booking Section')
 @Controller('booking')
 export class BookingController {
   
