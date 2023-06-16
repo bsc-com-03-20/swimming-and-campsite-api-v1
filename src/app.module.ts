@@ -7,11 +7,11 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'mysql', 
-    host: 'sql10.freesqldatabase.com', 
+    host: 'db4free.net', 
     port: 3306,
-    password: 'zMCgcP8Ph9',
-    username: 'sql10624834',
-    database: 'sql10624834',
+    password: 'chancellor123@',
+    username: 'swimming',
+    database: 'swimming',
     autoLoadEntities: true,
     synchronize: true, 
    
